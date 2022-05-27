@@ -1,5 +1,5 @@
 import argparse
-from lib.detector import Detector
+from ..common.lib.detector import Detector
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Data quality framework by reading YAML configuration file')
