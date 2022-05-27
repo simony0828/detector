@@ -4,75 +4,75 @@ What is detector? It's a YAML Configuration style for running data quality check
 # how it works
 Using the YAML configuration like this format:
 
-target_table:
-    name: schema.table
- 
-notification_email: user@company.com
-enable_email: true
- 
-dq:
-    trending:
-        enabled: true
-        columns:
-          - count(*)
-        threshold: 0.3
- 
-    trending-2:
-        enabled: true
-        columns:
-          - sum(gsv)
-        threshold: '+0.1'
- 
-    up_to_date:
-        enabled: true
-        columns:
-          - updated_date
- 
-    day_to_day:
-        enabled: true
-        columns:
-          - count(*)
-        threshold: 0.3
-        group_by: dw_modified_ts
-        num_days: 7
- 
-    missing_dates:
-        enabled: true
-        columns:
-          - etl_bucket_tstmp
-          - report_date
- 
-    std_dev:
-        enabled: true
-        columns:
-          - count(*)
-        threshold: 1.5
- 
-dq_custom:
-    check1:
-      enabled: true
-      stop_on_failure: true
-      description: This is for unit testing custom check1
-      sql: |
-        select case when count(*) == 0 then 0 else 1 end result
-        ,count(*) as tgt_value, NULL as src_value
-        from (
-          select
-          skey,
-          id,
-          count(*) cnt
-          from
-          schema.table
-          group by
-          1,2
-          having count(*) > 1
-        ) subq
- 
-    check2:
-      enabled: true
-      stop_on_failure: true
-      description: This is for unit testing custom check2
-      sql_file: <file>
+> target_table:
+>     name: schema.table
+>  
+> notification_email: user@company.com
+> enable_email: true
+>  
+> dq:
+>     trending:
+>         enabled: true
+>         columns:
+>           - count(*)
+>         threshold: 0.3
+>  
+>     trending-2:
+>         enabled: true
+>         columns:
+>           - sum(gsv)
+>         threshold: '+0.1'
+>  
+>     up_to_date:
+>         enabled: true
+>         columns:
+>           - updated_date
+>  
+>     day_to_day:
+>         enabled: true
+>         columns:
+>           - count(*)
+>         threshold: 0.3
+>         group_by: dw_modified_ts
+>         num_days: 7
+>  
+>     missing_dates:
+>         enabled: true
+>         columns:
+>           - etl_bucket_tstmp
+>           - report_date
+>  
+>     std_dev:
+>         enabled: true
+>         columns:
+>           - count(*)
+>         threshold: 1.5
+>  
+> dq_custom:
+>     check1:
+>       enabled: true
+>       stop_on_failure: true
+>       description: This is for unit testing custom check1
+>       sql: |
+>         select case when count(*) == 0 then 0 else 1 end result
+>         ,count(*) as tgt_value, NULL as src_value
+>         from (
+>           select
+>           skey,
+>           id,
+>           count(*) cnt
+>           from
+>           schema.table
+>           group by
+>           1,2
+>           having count(*) > 1
+>         ) subq
+>  
+>     check2:
+>       enabled: true
+>       stop_on_failure: true
+>       description: This is for unit testing custom check2
+>       sql_file: <file>
 
 Detail for generic check
 - Trending: For tracking and compare the metric column from previous run
