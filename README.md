@@ -74,6 +74,7 @@ dq_custom:
       description: This is for unit testing custom check2
       sql_file: <file>
 ```
+
 Detail for generic check:
 - **Trending:** For tracking and compare the metric column from previous run
 - **Up_to_date:** To check if data is up to date
@@ -86,7 +87,7 @@ Detail for generic check:
 
 # how to run
 ```
-python3 run_detector.py --file <file> [--run_hour YYYY-MM-DD HH:00:00] [--dry_run] [--unit_test] [--setup] [--variable] [--variable] ...
+python3 run_detector.py --file <file>.yaml [--run_hour YYYY-MM-DD HH:00:00] [--dry_run] [--unit_test] [--setup] [--variable k1=v1] [--variable k2=v2] ...
 ```
 
 > **--file / -f:**	The YAML configuration file containing all the data quality checks
